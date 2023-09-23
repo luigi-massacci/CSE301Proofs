@@ -7,6 +7,10 @@ import Mathlib.Tactic
 namespace Lab3
 section Lab3
 
+--------------------------------------------------------------------------------
+-- MONOID ASSUMPTIONS
+--------------------------------------------------------------------------------
+
 -- Assume that the list elements come from some type with monoid structure
 variable {α : Type _} [Monoid α]
 
@@ -14,8 +18,7 @@ variable {α : Type _} [Monoid α]
 def f : α → α → α  := (· * · )
 def v := (1 : α)
 
-
--- these are just for comfort so that the simplifier will reduce identities
+-- These are just for comfort so that the simplifier will reduce identities
 -- involving f and v as well as unfolding computations
 @[simp]
 lemma left_unit : ∀ e : α, f v e = e := by
@@ -45,6 +48,10 @@ open List
 -- def foldr (f : α → β → β) (init : β) : List α → β
 --   | []     => init
 --   | a :: l => f a (foldr f init l)
+
+--------------------------------------------------------------------------------
+-- ACTUAL PROOF
+--------------------------------------------------------------------------------
 
 -- The technical lemma for the proof: the key is to quantify over the seed
 -- so it is free in the first induction hypothesis, followed by a second
